@@ -1,17 +1,22 @@
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, Keyboard, StyleSheet, View } from 'react-native';
 import Input, {
   IconNames,
   KeyboardTypes,
   ReturnKeyTypes,
 } from '../components/Input';
-import SafeInputView from '../components/SafeInputView';
 import { useRef, useState } from 'react';
+import SafeInputView from '../components/SafeInputView';
 import Button from '../components/Button';
 
 const SignInScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const passwordRef = useRef(null);
+
+  const onSubmit = () => {
+    Keyboard.dismiss();
+    console.log(email, password);
+  };
 
   return (
     <SafeInputView>
@@ -35,9 +40,10 @@ const SignInScreen = () => {
           value={password}
           onChangeText={(password) => setPassword(password.trim())}
           iconName={IconNames.PASSWORD}
+          onSubmitEditing={onSubmit}
         />
         <View style={styles.buttonContainer}>
-          <Button title="로그인" />
+          <Button title="로그인" onPress={onSubmit} />
         </View>
       </View>
     </SafeInputView>

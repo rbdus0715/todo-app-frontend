@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 const Button = ({ title, onPress }) => {
   return (
     <Pressable
+      onPress={onPress}
       style={({ pressed }) => [
         styles.container,
         pressed && { backgroundColor: PRIMARY.DARK },
