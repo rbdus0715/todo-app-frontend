@@ -13,8 +13,8 @@ const SignInScreen = () => {
       />
       <Input
         title={'비밀번호'}
-        keyboardType={KeyboardTypes.DEFAULT}
         returnKeyType={ReturnKeyTypes.DONE}
+        secureTextEntry
       />
     </View>
   );
