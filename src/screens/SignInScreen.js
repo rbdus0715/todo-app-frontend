@@ -4,7 +4,7 @@ import Input, {
   KeyboardTypes,
   ReturnKeyTypes,
 } from '../components/Input';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import SafeInputView from '../components/SafeInputView';
 import Button from '../components/Button';
 
@@ -12,11 +12,16 @@ const SignInScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const passwordRef = useRef(null);
+  const [disabled, setDisabled] = useState(true);
 
   const onSubmit = () => {
     Keyboard.dismiss();
     console.log(email, password);
   };
+
+  useEffect(() => {
+    setDisabled(!email || !password);
+  }, [email, password]);
 
   return (
     <SafeInputView>
@@ -43,7 +48,7 @@ const SignInScreen = () => {
           onSubmitEditing={onSubmit}
         />
         <View style={styles.buttonContainer}>
-          <Button title="로그인" onPress={onSubmit} />
+          <Button title="로그인" onPress={onSubmit} disabled={disabled} />
         </View>
       </View>
     </SafeInputView>
