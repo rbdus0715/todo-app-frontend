@@ -1,9 +1,12 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
+import Input from '../components/Input';
 
 const SignInScreen = () => {
   return (
     <View style={styles.container}>
       <Image source={require('../../assets/main.png')} style={styles.image} />
+      <Input title={'이메일'} placeholder={'your@email.com'} />
+      <Input title={'비밀번호'} />
     </View>
   );
 };
