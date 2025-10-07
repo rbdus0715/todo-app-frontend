@@ -1,7 +1,12 @@
 import PropTypes from 'prop-types';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
-const Input = ({ title, placeholder }) => {
+export const KeyboardTypes = {
+  DEFAULT: 'default',
+  EMAIL: 'email-address',
+};
+
+const Input = ({ title, placeholder, keyboardType }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
@@ -9,14 +14,22 @@ const Input = ({ title, placeholder }) => {
         style={styles.input}
         placeholder={placeholder ?? title}
         placeholderTextColor={'#a3a3a3'}
+        autoCapitalize="none"
+        autoCorrect={false}
+        keyboardType={keyboardType}
       />
     </View>
   );
 };
 
+Input.defaultProps = {
+  keyboardType: KeyboardTypes.DEFAULT,
+};
+
 Input.propTypes = {
   title: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
+  keyboardType: PropTypes.oneOf(Object.values(KeyboardTypes)),
 };
 
 const styles = StyleSheet.create({
@@ -31,7 +44,7 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderRadius: 8,
-    borderColor: 'black',
+    paddingHorizontal: 10,
     height: 42,
   },
 });
