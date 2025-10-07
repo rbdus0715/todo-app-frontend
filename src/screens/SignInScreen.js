@@ -5,13 +5,12 @@ import Input, {
   ReturnKeyTypes,
 } from '../components/Input';
 import SafeInputView from '../components/SafeInputView';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 const SignInScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  console.log(email, password);
+  const passwordRef = useRef(null);
 
   return (
     <SafeInputView>
@@ -25,8 +24,10 @@ const SignInScreen = () => {
           value={email}
           onChangeText={(email) => setEmail(email.trim())}
           iconName={IconNames.EMAIL}
+          onSubmitEditing={() => passwordRef.current.focus()}
         />
         <Input
+          ref={passwordRef}
           title={'비밀번호'}
           returnKeyType={ReturnKeyTypes.DONE}
           secureTextEntry
