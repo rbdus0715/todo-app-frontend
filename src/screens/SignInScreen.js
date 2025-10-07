@@ -14,14 +14,19 @@ const SignInScreen = () => {
   const [password, setPassword] = useState('');
   const passwordRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async () => {
-    try {
-      Keyboard.dismiss();
-      const data = await signIn(email, password);
-      console.log(data);
-    } catch (error) {
-      console.log(error);
+    if (!isLoading && !disabled) {
+      try {
+        setIsLoading(true);
+        Keyboard.dismiss();
+        const data = await signIn(email, password);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+      setIsLoading(false);
     }
   };
 
@@ -54,7 +59,12 @@ const SignInScreen = () => {
           onSubmitEditing={onSubmit}
         />
         <View style={styles.buttonContainer}>
-          <Button title="로그인" onPress={onSubmit} disabled={disabled} />
+          <Button
+            title="로그인"
+            onPress={onSubmit}
+            disabled={disabled}
+            isLoading={isLoading}
+          />
         </View>
       </View>
     </SafeInputView>
