@@ -6,6 +6,7 @@ import Input, {
 } from '../components/Input';
 import SafeInputView from '../components/SafeInputView';
 import { useRef, useState } from 'react';
+import Button from '../components/Button';
 
 const SignInScreen = () => {
   const [email, setEmail] = useState('');
@@ -35,6 +36,9 @@ const SignInScreen = () => {
           onChangeText={(password) => setPassword(password.trim())}
           iconName={IconNames.PASSWORD}
         />
+        <View style={styles.buttonContainer}>
+          <Button title="로그인" />
+        </View>
       </View>
     </SafeInputView>
   );
@@ -45,6 +49,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  buttonContainer: {
+    width: '100%',
+    marginTop: 30,
+    paddingHorizontal: 20,
   },
   image: {
     width: 200,
