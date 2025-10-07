@@ -20,6 +20,7 @@ const SignInScreen = () => {
           returnKeyType={ReturnKeyTypes.NEXT}
           value={email}
           onChangeText={(email) => setEmail(email.trim())}
+          onFocus
         />
         <Input
           title={'비밀번호'}
