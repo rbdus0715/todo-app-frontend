@@ -7,6 +7,7 @@ import Input, {
 import { useEffect, useRef, useState } from 'react';
 import SafeInputView from '../components/SafeInputView';
 import Button from '../components/Button';
+import { signIn } from '../api/auth';
 
 const SignInScreen = () => {
   const [email, setEmail] = useState('');
@@ -14,9 +15,14 @@ const SignInScreen = () => {
   const passwordRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
 
-  const onSubmit = () => {
-    Keyboard.dismiss();
-    console.log(email, password);
+  const onSubmit = async () => {
+    try {
+      Keyboard.dismiss();
+      const data = await signIn(email, password);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
