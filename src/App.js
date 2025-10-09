@@ -3,21 +3,22 @@ import { StyleSheet, View } from 'react-native';
 import { WHITE } from './color.js';
 import AuthStack from './navigations/AuthStack.js';
 import { NavigationContainer } from '@react-navigation/native';
+import MainStack from './navigations/MainStack.js';
+import { useState } from 'react';
 
 const App = () => {
+  const [user, setUser] = useState(null);
+
   return (
-    <NavigationContainer style={styles.container}>
+    <NavigationContainer>
       <StatusBar style="dark" />
-      <AuthStack />
+      {user ? (
+        <MainStack user={user} setUser={setUser} />
+      ) : (
+        <AuthStack user={user} setUser={setUser} />
+      )}
     </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: WHITE,
-  },
-});
 
 export default App;

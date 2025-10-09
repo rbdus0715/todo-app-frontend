@@ -10,7 +10,7 @@ import Button from '../components/Button';
 import { signIn } from '../api/auth';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-const SignInScreen = ({ navigation }) => {
+const SignInScreen = ({ setUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const passwordRef = useRef(null);
@@ -25,7 +25,7 @@ const SignInScreen = ({ navigation }) => {
         Keyboard.dismiss();
         const data = await signIn(email, password);
         setIsLoading(false);
-        navigation.navigate('List');
+        setUser(data);
       } catch (error) {
         Alert.alert('로그인 실패', error, [
           { text: '확인', onPress: () => setIsLoading(false) },
