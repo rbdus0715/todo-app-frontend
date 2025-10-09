@@ -3,6 +3,8 @@ import SignInScreen from '../screens/SignInScreen';
 import ListScreen from '../screens/ListScreen';
 import { PRIMARY, WHITE } from '../color';
 import HeaderLeftButton from '../components/HeaderLeftButton';
+import HeaderRightButton from '../components/HeaderRightButton';
+import SettingsScreen from '../screens/SettingsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,6 +15,11 @@ const AuthStack = () => {
       screenOptions={{
         contentStyle: { backgroundColor: WHITE },
         headerTitleAlign: 'center',
+        headerTintColor: PRIMARY.DEFAULT,
+        headerTitleStyle: {
+          fontWeight: '700',
+          // color: 'lightcoral',
+        },
         headerLeft: HeaderLeftButton,
       }}
     >
@@ -21,11 +28,7 @@ const AuthStack = () => {
         component={ListScreen}
         options={{
           title: 'TODO LIST',
-          headerTintColor: PRIMARY.DEFAULT,
-          headerTitleStyle: {
-            fontWeight: '700',
-            // color: 'lightcoral',
-          },
+          headerRight: HeaderRightButton,
           //   headerTitle: ({ children, tintColor }) => {
           //     return (
           //       <Pressable onPress={() => console.log('test')}>
@@ -40,8 +43,10 @@ const AuthStack = () => {
         component={SignInScreen}
         options={{
           title: '로그인',
+          headerShown: false,
         }}
       />
+      <Stack.Screen name="Settings" component={SettingsScreen} />
     </Stack.Navigator>
   );
 };
