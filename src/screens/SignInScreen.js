@@ -4,12 +4,12 @@ import Input, {
   KeyboardTypes,
   ReturnKeyTypes,
 } from '../components/Input';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import SafeInputView from '../components/SafeInputView';
 import Button from '../components/Button';
 import { signIn } from '../api/auth';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import UserContext from '../contexts/UserContext';
+import { useUserContext } from '../contexts/UserContext';
 
 const SignInScreen = () => {
   const [email, setEmail] = useState('');
@@ -18,7 +18,7 @@ const SignInScreen = () => {
   const [disabled, setDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const inserts = useSafeAreaInsets();
-  const { setUser } = useContext(UserContext);
+  const { setUser } = useUserContext();
 
   const onSubmit = async () => {
     if (!isLoading && !disabled) {
